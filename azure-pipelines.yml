@@ -91,48 +91,23 @@ jobs:
       backendAzureRmKey: 'patronics_terraform.tfstate'
 
 
+  # - task: TerraformTask@5
+  #   displayName: Terraform Apply
+  #   inputs:
+  #     provider: 'azurerm'
+  #     command: 'apply'
+  #     workingDirectory: '$(System.DefaultWorkingDirectory)/todoappinfra'
+  #     environmentServiceNameAzureRM: 'my_service_connection_pat'
+  #     environmentAzureRmOverrideSubscriptionID: '69ba3bc7-f967-4749-bbe8-54cb06e4a54a'
+
+
+
   - task: TerraformTask@5
-    displayName: Terraform Apply
+    displayName: Terraform Destroy
     inputs:
       provider: 'azurerm'
-      command: 'apply'
+      command: 'destroy'
       workingDirectory: '$(System.DefaultWorkingDirectory)/todoappinfra'
       environmentServiceNameAzureRM: 'my_service_connection_pat'
       environmentAzureRmOverrideSubscriptionID: '69ba3bc7-f967-4749-bbe8-54cb06e4a54a'
-
-
-  # - task: TerraformTask@5
-  #   displayName: Terraform Output
-  #   inputs:
-  #     provider: 'azurerm'
-  #     command: 'output'
-  #     workingDirectory: '$(System.DefaultWorkingDirectory)/todoappinfra'
-  #     environmentServiceNameAzureRM: 'my_service_connection_pat'
-  #     environmentAzureRmOverrideSubscriptionID: '69ba3bc7-f967-4749-bbe8-54cb06e4a54a'
-
-  # - job: Destroy
-  # displayName: Terraform ka Destroy
-  # dependsOn: Apply
-  # steps:
-  # - task: TerraformTask@5
-  #   displayName: Terraform init
-  #   inputs:
-  #     provider: 'azurerm'
-  #     command: 'init'
-  #     workingDirectory: '$(System.DefaultWorkingDirectory)/todoappinfra'
-  #     backendServiceArm: 'my_service_connection_pat'
-  #     backendAzureRmOverrideSubscriptionID: '69ba3bc7-f967-4749-bbe8-54cb06e4a54a'
-  #     backendAzureRmResourceGroupName: 'container_rg'
-  #     backendAzureRmStorageAccountName: 'statefilestg12'
-  #     backendAzureRmContainerName: 'mohitcontainer12'
-  #     backendAzureRmKey: 'patronics_terraform.tfstate'
-
-  # - task: TerraformTask@5
-  #   displayName: Terraform Destroy
-  #   inputs:
-  #     provider: 'azurerm'
-  #     command: 'destroy'
-  #     workingDirectory: '$(System.DefaultWorkingDirectory)/todoappinfra'
-  #     environmentServiceNameAzureRM: 'my_service_connection_pat'
-  #     environmentAzureRmOverrideSubscriptionID: '69ba3bc7-f967-4749-bbe8-54cb06e4a54a'
 
