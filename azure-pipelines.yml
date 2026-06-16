@@ -32,3 +32,11 @@ steps:
     workingDirectory: '$(System.DefaultWorkingDirectory)/todoappinfra'
     environmentServiceNameAzureRM: 'my_service_connection_pat'
     environmentAzureRmOverrideSubscriptionID: '69ba3bc7-f967-4749-bbe8-54cb06e4a54a'
+
+- task: TerraformTask@5
+  inputs:
+    provider: 'azurerm'
+    command: 'apply'
+    workingDirectory: '$(System.DefaultWorkingDirectory)/todoappinfra'
+    environmentServiceNameAzureRM: 'my_service_connection_pat'
+    environmentAzureRmOverrideSubscriptionID: '69ba3bc7-f967-4749-bbe8-54cb06e4a54a'
