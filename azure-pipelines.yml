@@ -17,3 +17,9 @@ steps:
     backendAzureRmStorageAccountName: 'statefilestg12'
     backendAzureRmContainerName: 'mohitcontainer12'
     backendAzureRmKey: 'patronics_terraform.tfstate'
+
+- task: TerraformTask@5
+  inputs:
+    provider: 'azurerm'
+    command: 'validate'
+    workingDirectory: '$(System.DefaultWorkingDirectory)/todoappinfra'
