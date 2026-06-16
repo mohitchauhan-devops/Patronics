@@ -8,6 +8,7 @@ steps:
     terraformVersion: 'latest'
 
 - task: TerraformTask@5
+  displayName: Terraform init
   inputs:
     provider: 'azurerm'
     command: 'init'
@@ -20,12 +21,14 @@ steps:
     backendAzureRmKey: 'patronics_terraform.tfstate'
 
 - task: TerraformTask@5
+  displayName: Terraform validate
   inputs:
     provider: 'azurerm'
     command: 'validate'
     workingDirectory: '$(System.DefaultWorkingDirectory)/todoappinfra'
 
 - task: TerraformTask@5
+  displayName: Terraform Plan
   inputs:
     provider: 'azurerm'
     command: 'plan'
@@ -34,9 +37,30 @@ steps:
     environmentAzureRmOverrideSubscriptionID: '69ba3bc7-f967-4749-bbe8-54cb06e4a54a'
 
 - task: TerraformTask@5
+  displayName: Terraform Apply
   inputs:
     provider: 'azurerm'
     command: 'apply'
     workingDirectory: '$(System.DefaultWorkingDirectory)/todoappinfra'
     environmentServiceNameAzureRM: 'my_service_connection_pat'
     environmentAzureRmOverrideSubscriptionID: '69ba3bc7-f967-4749-bbe8-54cb06e4a54a'
+
+
+- task: TerraformTask@5
+  displayName: Terraform Output
+  inputs:
+    provider: 'azurerm'
+    command: 'output'
+    workingDirectory: '$(System.DefaultWorkingDirectory)/todoappinfra'
+    environmentServiceNameAzureRM: 'my_service_connection_pat'
+    environmentAzureRmOverrideSubscriptionID: '69ba3bc7-f967-4749-bbe8-54cb06e4a54a'
+
+- task: TerraformTask@5
+  displayName: Terraform Destroy
+  inputs:
+    provider: 'azurerm'
+    command: 'destroy'
+    workingDirectory: '$(System.DefaultWorkingDirectory)/todoappinfra'
+    environmentServiceNameAzureRM: 'my_service_connection_pat'
+    environmentAzureRmOverrideSubscriptionID: '69ba3bc7-f967-4749-bbe8-54cb06e4a54a'
+
