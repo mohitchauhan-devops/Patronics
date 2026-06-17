@@ -134,6 +134,7 @@ stages:
           backendAzureRmKey: 'patronics_terraform.tfstate'
 
       - task: TerraformTask@5
+        displayName: terraformapply
         inputs:
           provider: 'azurerm'
           command: 'apply'
