@@ -20,10 +20,10 @@ stages:
           terraformVersion: 'latest'
 
 #=================================
-# Stage - 2 Validation
+# Stage - 2 Validation & init
 #=================================
 - stage: Validation
-  displayName: "Terraform Validation"
+  displayName: "Terraform Validation & init"
   dependsOn: Setup
 
   jobs:
@@ -45,6 +45,19 @@ stages:
           customCommand: 'fmt'
           environmentServiceNameAzureRM: 'my_service_connection_pat'
           environmentAzureRmOverrideSubscriptionID: '69ba3bc7-f967-4749-bbe8-54cb06e4a54a'
+
+      - task: TerraformTask@5
+        displayName: Terraform init
+        inputs:
+          provider: 'azurerm'
+          command: 'init'
+          workingDirectory: '$(System.DefaultWorkingDirectory)/todoappinfra'
+          backendServiceArm: 'my_service_connection_pat'
+          backendAzureRmOverrideSubscriptionID: '69ba3bc7-f967-4749-bbe8-54cb06e4a54a'
+          backendAzureRmResourceGroupName: 'container_rg'
+          backendAzureRmStorageAccountName: 'statefilestg12'
+          backendAzureRmContainerName: 'mohitcontainer12'
+          backendAzureRmKey: 'patronics_terraform.tfstate'
 
       - task: TerraformTask@5
         displayName: Terraform validate
