@@ -121,7 +121,8 @@ stages:
       - task: ManualValidation@1
         timeoutInMinutes: 100
         inputs:
-          notifyUsers: 'mohitqa01@gmail.com'
+          notifyUsers: 'kapilsharmamgcgvv@gmail.com'
+          approvers: 'kapilsharmamgcgvv@gmail.com'
           instructions: 'Please review Terraform Plan and approve deployment'
           onTimeout: reject
 
