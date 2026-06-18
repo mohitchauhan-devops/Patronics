@@ -120,8 +120,8 @@ stages:
       
       - task: ManualValidation@1
         inputs:
-          notifyUsers: 'kapil@kapilsharmamgcgvvgmail.onmicrosoft.com'
-          approvers: 'kapil@kapilsharmamgcgvvgmail.onmicrosoft.com'
+          notifyUsers: 'mohkarvivek99@gmail.com'
+          approvers: 'mohkarvivek99@gmail.com'
           instructions: 'approve please'
           onTimeout: 'resume'
 
