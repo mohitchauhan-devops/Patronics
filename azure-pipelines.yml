@@ -105,7 +105,28 @@ stages:
           environmentAzureRmOverrideSubscriptionID: '69ba3bc7-f967-4749-bbe8-54cb06e4a54a'
 
 #=================================
-# Stage - 4 Apply 
+# Stage - 4 Maual Validation     
+#=================================
+
+- stage: Approval
+  displayName: Manual Validation
+  dependsOn: Plan
+
+  jobs:
+    - job: waitforApproval
+      pool: server
+
+      steps:
+      
+      - task: ManualValidation@1
+        timeoutInMinutes: 100
+        inputs:
+          notifyUsers: 'mohitqa01@gmail.com'
+          instructions: 'Please review Terraform Plan and approve deployment'
+          onTimeout: reject
+
+#=================================
+# Stage - 5 Apply 
 #=================================
 - stage: Apply
   displayName: Terraform Apply
