@@ -124,7 +124,7 @@ stages:
           notifyUsers: 'kapilsharmamgcgvv@gmail.com'
           approvers: 'kapilsharmamgcgvv@gmail.com'
           instructions: 'Please review Terraform Plan and approve deployment'
-          onTimeout: reject
+          onTimeout: resume
 
 #=================================
 # Stage - 5 Apply 
