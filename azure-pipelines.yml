@@ -130,7 +130,7 @@ stages:
 #=================================
 - stage: Apply
   displayName: Terraform Apply
-  dependsOn:  Plan
+  dependsOn:  Approval
 
   jobs:
     - job: TerraformApply
