@@ -119,11 +119,12 @@ stages:
       steps:
       
       - task: ManualValidation@1
+        timeoutInMinutes: 60
         inputs:
-          notifyUsers: 'mohkarvivek99@gmail.com'
-          approvers: 'mohkarvivek99@gmail.com'
-          instructions: 'approve please'
-          onTimeout: 'resume'
+          notifyUsers: 'mohitqa01@gmail.com'
+          approvers: 'mohitqa01@gmail.com'
+          instructions: 'aprrove my code'
+          onTimeout: reject
 
 #=================================
 # Stage - 5 Apply 
