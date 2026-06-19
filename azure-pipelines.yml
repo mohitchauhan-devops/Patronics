@@ -2,6 +2,27 @@ trigger: none
 
 pool: powermanage-pool
 
+# =================================
+# PARAMETERS
+# =================================
+parameters:
+  - name: environment
+    displayName: select environment
+    type: string
+    default: dev
+    values:
+      - dev
+      - qa
+      - prod
+
+  - name: approver
+    displayName: Approver email
+    type: string
+    default: 'mohitchauhan.qa@gmail.com'
+
+# =================================
+# variables
+# =================================
 variables:
   serviceconnection: 'my_service_connection_pat'
   terraformworkingdir: '$(System.DefaultWorkingDirectory)/todoappinfra'
@@ -9,7 +30,7 @@ variables:
   resourceGroupName: 'container_rg'
   storageAccountName: 'statefilestg12'
   containerName: 'mohitcontainer12'
-  tfStateKey: 'patronics_terraform.tfstate'
+  tfStateKey: '${{ parameters.environment }}.tfstate'
   approverEmail: 'mohitchauhan.qa@gmail.com'
 
 stages:
@@ -131,9 +152,9 @@ stages:
       - task: ManualValidation@1
         timeoutInMinutes: 60
         inputs:
-          notifyUsers: '$(approverEmail)'
-          approvers: '$(approverEmail)'
-          instructions: 'aprrove my code'
+          notifyUsers: '${{ parameters.approver }}'
+          approvers: '${{ parameters.approver }}'
+          instructions: 'Approve deployment for ${{ parameters.environment }} environment'
           onTimeout: reject
 
 #=================================
