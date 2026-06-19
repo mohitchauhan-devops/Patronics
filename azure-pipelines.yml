@@ -2,6 +2,16 @@ trigger: none
 
 pool: powermanage-pool
 
+variables:
+  serviceconnection: 'my_service_connection_pat'
+  terraformworkingdir: '$(System.DefaultWorkingDirectory)/todoappinfra'
+  subscriptionid: '69ba3bc7-f967-4749-bbe8-54cb06e4a54a'
+  resourceGroupName: 'container_rg'
+  storageAccountName: 'statefilestg12'
+  containerName: 'mohitcontainer12'
+  tfStateKey: 'patronics_terraform.tfstate'
+  approverEmail: 'mohitchauhan.qa@gmail.com'
+
 stages:
 
 #=================================
@@ -40,31 +50,31 @@ stages:
         inputs:
           provider: 'azurerm'
           command: 'custom'
-          workingDirectory: '$(System.DefaultWorkingDirectory)/todoappinfra'
+          workingDirectory: '$(terraformworkingdir)'
           outputTo: 'console'
           customCommand: 'fmt'
-          environmentServiceNameAzureRM: 'my_service_connection_pat'
-          environmentAzureRmOverrideSubscriptionID: '69ba3bc7-f967-4749-bbe8-54cb06e4a54a'
+          environmentServiceNameAzureRM: '$(serviceconnection)'
+          environmentAzureRmOverrideSubscriptionID: '$(subscriptionid)'
 
       - task: TerraformTask@5
         displayName: Terraform init
         inputs:
           provider: 'azurerm'
           command: 'init'
-          workingDirectory: '$(System.DefaultWorkingDirectory)/todoappinfra'
-          backendServiceArm: 'my_service_connection_pat'
-          backendAzureRmOverrideSubscriptionID: '69ba3bc7-f967-4749-bbe8-54cb06e4a54a'
-          backendAzureRmResourceGroupName: 'container_rg'
-          backendAzureRmStorageAccountName: 'statefilestg12'
-          backendAzureRmContainerName: 'mohitcontainer12'
-          backendAzureRmKey: 'patronics_terraform.tfstate'
+          workingDirectory: '$(terraformworkingdir)'
+          backendServiceArm: '$(serviceconnection)'
+          backendAzureRmOverrideSubscriptionID: '$(subscriptionid)'
+          backendAzureRmResourceGroupName: '$(resourceGroupName)'
+          backendAzureRmStorageAccountName: '$(storageAccountName)'
+          backendAzureRmContainerName: '$(containerName)'
+          backendAzureRmKey: '$(tfStateKey)'
 
       - task: TerraformTask@5
         displayName: Terraform validate
         inputs:
           provider: 'azurerm'
           command: 'validate'
-          workingDirectory: '$(System.DefaultWorkingDirectory)/todoappinfra'
+          workingDirectory: '$(terraformworkingdir)'
 
 #=================================
 # Stage - 3 Plan
@@ -87,22 +97,22 @@ stages:
         inputs:
           provider: 'azurerm'
           command: 'init'
-          workingDirectory: '$(System.DefaultWorkingDirectory)/todoappinfra'
-          backendServiceArm: 'my_service_connection_pat'
-          backendAzureRmOverrideSubscriptionID: '69ba3bc7-f967-4749-bbe8-54cb06e4a54a'
-          backendAzureRmResourceGroupName: 'container_rg'
-          backendAzureRmStorageAccountName: 'statefilestg12'
-          backendAzureRmContainerName: 'mohitcontainer12'
-          backendAzureRmKey: 'patronics_terraform.tfstate'
+          workingDirectory: '$(terraformworkingdir)'
+          backendServiceArm: '$(serviceconnection)'
+          backendAzureRmOverrideSubscriptionID: '$(subscriptionid)'
+          backendAzureRmResourceGroupName: '$(resourceGroupName)'
+          backendAzureRmStorageAccountName: '$(storageAccountName)'
+          backendAzureRmContainerName: '$(containerName)'
+          backendAzureRmKey: '$(tfStateKey)'
 
       - task: TerraformTask@5
         displayName: Terraform Plan
         inputs:
           provider: 'azurerm'
           command: 'plan'
-          workingDirectory: '$(System.DefaultWorkingDirectory)/todoappinfra'
-          environmentServiceNameAzureRM: 'my_service_connection_pat'
-          environmentAzureRmOverrideSubscriptionID: '69ba3bc7-f967-4749-bbe8-54cb06e4a54a'
+          workingDirectory: '$(terraformworkingdir)'
+          environmentServiceNameAzureRM: '$(serviceconnection)'
+          environmentAzureRmOverrideSubscriptionID: '$(subscriptionid)'
 
 #=================================
 # Stage - 4 Maual Validation     
@@ -121,8 +131,8 @@ stages:
       - task: ManualValidation@1
         timeoutInMinutes: 60
         inputs:
-          notifyUsers: 'mohitchauhan.qa@gmail.com'
-          approvers: 'mohitchauhan.qa@gmail.com'
+          notifyUsers: '$(approverEmail)'
+          approvers: '$(approverEmail)'
           instructions: 'aprrove my code'
           onTimeout: reject
 
@@ -147,19 +157,19 @@ stages:
         inputs:
           provider: 'azurerm'
           command: 'init'
-          workingDirectory: '$(System.DefaultWorkingDirectory)/todoappinfra'
-          backendServiceArm: 'my_service_connection_pat'
-          backendAzureRmOverrideSubscriptionID: '69ba3bc7-f967-4749-bbe8-54cb06e4a54a'
-          backendAzureRmResourceGroupName: 'container_rg'
-          backendAzureRmStorageAccountName: 'statefilestg12'
-          backendAzureRmContainerName: 'mohitcontainer12'
-          backendAzureRmKey: 'patronics_terraform.tfstate'
+          workingDirectory: '$(terraformworkingdir)'
+          backendServiceArm: '$(serviceconnection)'
+          backendAzureRmOverrideSubscriptionID: '$(subscriptionid)'
+          backendAzureRmResourceGroupName: '$(resourceGroupName)'
+          backendAzureRmStorageAccountName: '$(storageAccountName)'
+          backendAzureRmContainerName: '$(containerName)'
+          backendAzureRmKey: '$(tfStateKey)'
 
       - task: TerraformTask@5
         displayName: terraformapply
         inputs:
           provider: 'azurerm'
           command: 'apply'
-          workingDirectory: '$(System.DefaultWorkingDirectory)/todoappinfra'
-          environmentServiceNameAzureRM: 'my_service_connection_pat'
-          environmentAzureRmOverrideSubscriptionID: '69ba3bc7-f967-4749-bbe8-54cb06e4a54a'
+          workingDirectory: '$(terraformworkingdir)'
+          environmentServiceNameAzureRM: '$(serviceconnection)'
+          environmentAzureRmOverrideSubscriptionID: '$(subscriptionid)'
