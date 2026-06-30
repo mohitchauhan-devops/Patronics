@@ -1,8 +1,8 @@
 terraform {
   backend "azurerm" {
-    resource_group_name  = "container_rg"
-    storage_account_name = "statefilestg12"
-    container_name       = "mohitcontainer12"
+    resource_group_name  = "rg-terraformstorage123"
+    storage_account_name = "stgterraform1426"
+    container_name       = "mycontainer1234"
     key                  = "patronics_terraform.tfstate"
   }
   required_providers {
@@ -15,5 +15,5 @@ terraform {
 
 provider "azurerm" {
   features {}
-  subscription_id = "69ba3bc7-f967-4749-bbe8-54cb06e4a54a"
+  subscription_id = "561ee10c-91f3-420a-b686-4bb845074d5c"
 }
