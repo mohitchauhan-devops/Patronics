@@ -1,4 +1,5 @@
 terraform {
+required_version = ">= 1.9.0"
   backend "azurerm" {
     resource_group_name  = "rg-terraformstorage123"
     storage_account_name = "stgterraform1426"
