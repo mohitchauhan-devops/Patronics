@@ -97,12 +97,46 @@ stages:
           command: 'validate'
           workingDirectory: '$(terraformworkingdir)'
 
+#===================Security===========================================================
+
+- stage: Terraform_Lint
+  displayName: Terraform Lint
+  dependsOn: Validation
+
+  jobs:
+  - job: Run_TFLint
+    displayName: Run TFLint
+
+    steps:
+    - script: |
+        tflint --init
+      workingDirectory: $(default)
+      displayName: Initialize TFLint
+
+    - script: |
+        tflint
+      workingDirectory: $(default)
+      displayName: Run TFLint
+
+- stage: Terraform_Security
+  displayName: Terraform Security Scan
+  dependsOn: Terraform_Lint
+
+  jobs:
+  - job: Run_tfsec
+    displayName: Run tfsec Security Scan
+
+    steps:
+    - script: |
+        tfsec .
+      displayName: Run tfsec
+
 #=================================
 # Stage - 3 Plan
 #=================================
 - stage: Plan
   displayName: Terraform plan
-  dependsOn: Validation
+  dependsOn: Terraform_Security
 
   jobs:
     - job: Terraformplan
