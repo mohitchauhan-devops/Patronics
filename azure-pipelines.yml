@@ -110,12 +110,12 @@ stages:
     steps:
     - script: |
         tflint --init
-      workingDirectory: $(default)
+      workingDirectory: '$(terraformworkingdir)'
       displayName: Initialize TFLint
 
     - script: |
         tflint
-      workingDirectory: $(default)
+      workingDirectory: '$(terraformworkingdir)'
       displayName: Run TFLint
 
 - stage: Terraform_Security
