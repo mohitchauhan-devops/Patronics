@@ -24,7 +24,7 @@ parameters:
 # variables
 # =================================
 variables:
-  serviceconnection: 'connection_service'
+  serviceconnection: 'my_service_connection_pat1'
   terraformworkingdir: '$(System.DefaultWorkingDirectory)/todoappinfra'
   subscriptionid: '561ee10c-91f3-420a-b686-4bb845074d5c'
   resourceGroupName: 'rg-terraformstorage123'
