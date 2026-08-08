@@ -28,7 +28,7 @@ variables:
   terraformworkingdir: '$(System.DefaultWorkingDirectory)/todoappinfra'
   subscriptionid: '561ee10c-91f3-420a-b686-4bb845074d5c'
   resourceGroupName: 'rg-terraformstorage123'
-  storageAccountName: 'stgterraform1426'
+  storageAccountName: 'stgterra1426'
   containerName: 'mycontainer1234'
   tfStateKey: '${{ parameters.environment }}.tfstate'
   approverEmail: 'mohitchauhan.qa@gmail.com'
