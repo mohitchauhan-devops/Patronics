@@ -2,7 +2,7 @@ terraform {
 required_version = ">= 1.9.0"
   backend "azurerm" {
     resource_group_name  = "rg-terraformstorage123"
-    storage_account_name = "stgterraform1426"
+    storage_account_name = "stgterra1426"
     container_name       = "mycontainer1234"
     key                  = "patronics_terraform.tfstate"
   }
@@ -16,5 +16,5 @@ required_version = ">= 1.9.0"
 
 provider "azurerm" {
   features {}
-  subscription_id = "561ee10c-91f3-420a-b686-4bb845074d5c"
+  subscription_id = "81295e46-3820-4970-b3bf-3c33751bb0da"
 }
